@@ -1,0 +1,397 @@
+/* Reset e configurações básicas */
+html,
+body {
+    height: 100%;
+    /* Ocupa toda a altura da tela */
+    margin: 0;
+    /* Remove margens padrão */
+    padding: 0;
+    /* Remove preenchimento padrão */
+    overflow: hidden;
+    /* Impede rolagem da página */
+    font-family: 'Montserrat', Arial, sans-serif;
+    /* Fonte principal Montserrat para todo o projeto */
+    font-weight: 400;
+    /* Peso padrão 400 */
+}
+
+body {
+    min-height: 100vh;
+    /* Garante altura mínima da viewport */
+    display: flex;
+    /* Usa flexbox para layout */
+    flex-direction: column;
+    /* Organiza filhos em coluna */
+    text-align: center;
+    /* Centraliza texto */
+    background-color: #f5f5f5;
+    /* Cor de fundo */
+    color: #333;
+    /* Cor do texto */
+    height: 100vh;
+    /* Garante altura exata da viewport */
+    box-sizing: border-box;
+    /* Inclui bordas e padding no cálculo da altura */
+}
+
+/* Layout principal */
+main {
+    flex: 1 1 0;
+    /* Ocupa espaço restante */
+    display: flex;
+    /* Usa flexbox para layout */
+    justify-content: space-between;
+    /* Espaço entre elementos */
+    padding: 0px;
+    /* Sem padding */
+    overflow: hidden;
+    /* Impede rolagem interna no main */
+    min-height: 0;
+    /* Permite que o conteúdo encolha para caber */
+}
+
+/* Cabeçalho */
+header {
+    background-color: #222;
+    /* Fundo escuro */
+    color: white;
+    /* Texto branco */
+    padding: 2px;
+    /* Espaçamento interno */
+}
+
+/* Navegação das etapas */
+nav ul {
+    display: flex;
+    /* Flexbox para os itens */
+    justify-content: space-around;
+    /* Espaço igual entre itens */
+    background: #444;
+    /* Fundo escuro */
+    padding: 18px;
+    /* Espaçamento interno */
+    list-style: none;
+    /* Remove marcadores de lista */
+    color: white;
+    /* Texto branco */
+    margin: 0;
+    /* Remove margem padrão */
+}
+
+
+/* Barra de navegação das etapas como botões */
+.etapas-nav {
+    display: flex;
+    /* Flexbox para dividir igualmente */
+    padding: 0;
+    /* Remove padding padrão */
+    margin: 0;
+    /* Remove margem padrão */
+    list-style: none;
+    /* Remove marcadores */
+    background: #444;
+    /* Fundo escuro */
+    height: 53px;
+    /* Altura fixa */
+}
+
+.etapas-nav li {
+    flex: 1;
+    /* Cada item ocupa espaço igual */
+    display: flex;
+    /* Flex para centralizar botão */
+    align-items: stretch;
+    /* Estica o botão verticalmente */
+}
+
+.etapa-btn {
+    font-family: 'Montserrat', Arial, sans-serif;
+    /* Garante Montserrat */
+    font-weight: 400;
+    /* Peso padrão 400 */
+    flex: 1;
+    /* Ocupa todo o espaço do li */
+    background: transparent;
+    /* Fundo transparente */
+    color: #fff;
+    /* Texto branco */
+    border: none;
+    /* Sem borda padrão */
+    outline: none;
+    /* Sem contorno ao focar */
+    font-size: 1.1rem;
+    /* Tamanho da fonte */
+    cursor: pointer;
+    /* Cursor de clique */
+    position: relative;
+    /* Para barra ativa */
+    transition: background 0.2s;
+    border-bottom: 4px solid transparent;
+    /* Barra inferior padrão invisível */
+}
+
+.etapa-btn.active,
+.etapa-btn:focus {
+    border-bottom: 4px solid #ff0000;
+    /* Barra inferior vermelha no ativo */
+    background: #333;
+    /* Fundo levemente diferente */
+    color: #fff;
+    /* Mantém texto branco */
+}
+
+/* Remove espaçamento entre botões */
+.etapas-nav li + li .etapa-btn {
+    border-left: 1px solid #555;
+    /* Linha divisória opcional */
+}
+
+/* Área de pré-visualização */
+.motorcycle-preview {
+    flex: 4;
+    /* Ocupa maior parte do espaço */
+    text-align: center;
+    /* Centraliza conteúdo */
+    margin-left: -20px;
+    /* Ajuste de margem à esquerda */
+    display: flex;
+    /* Flexbox para layout interno */
+    flex-direction: column;
+    /* Organiza filhos em coluna */
+    position: relative;
+    /* Permite posicionamento absoluto de filhos */
+}
+
+.motorcycle-preview nav {
+    height: 53px;
+    /* Altura fixa da barra de etapas */
+}
+
+.header-options {
+    display: flex;
+    /* Flexbox */
+    height: 53px;
+    /* Altura fixa */
+    align-items: center;
+    /* Centraliza verticalmente */
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    background-color: rgb(85, 85, 85);
+    /* Fundo cinza escuro */
+    color: white;
+    /* Texto branco */
+}
+
+.header-options h2 {
+    font-family: 'Montserrat', Arial, sans-serif;
+    /* Garante Montserrat */
+    font-weight: 400;
+    /* Peso padrão 400 */
+}
+
+.motorcycle-preview img {
+    width: 70%;
+    /* Imagem ocupa 70% da largura */
+    height: auto;
+    /* Mantém proporção da imagem */
+    display: block;
+    /* Remove espaço extra */
+    margin-left: auto;
+    /* Centraliza horizontalmente */
+    margin-right: auto;
+    /* Centraliza horizontalmente */
+}
+
+/* Container da imagem de preview */
+.preview-container {
+    flex: 1;
+    /* Ocupa espaço disponível */
+    display: flex;
+    /* Flexbox para centralizar */
+    align-items: center;
+    /* Centraliza verticalmente */
+    background-color: #2e2e2e;
+    /* Fundo escuro */
+}
+
+/* Área de opções */
+.options {
+    flex: 1;
+    /* Ocupa menos espaço que preview */
+    display: flex;
+    /* Flexbox para layout interno */
+    flex-direction: column;
+    /* Organiza filhos em coluna */
+    text-align: center;
+    /* Centraliza texto */
+}
+
+/* Lista de miniaturas */
+.miniaturas {
+    display: flex;
+    /* Flexbox para miniaturas */
+    flex: 1;
+    /* Ocupa espaço disponível */
+    flex-direction: column;
+    /* Organiza miniaturas em coluna */
+    align-items: center;
+    /* Centraliza horizontalmente */
+    gap: 15px;
+    /* Espaço entre miniaturas */
+    justify-content: space-evenly;
+    /* Espaço igual entre miniaturas */
+    background-color: #464545;
+    /* Fundo cinza */
+}
+
+/* Imagens das miniaturas */
+.miniaturas img {
+    width: 300px;
+    /* Largura fixa das miniaturas */
+    cursor: pointer;
+    /* Cursor de clique */
+    transition: transform 0.2s ease-in-out;
+    /* Animação suave ao ampliar */
+}
+
+.miniaturas img:hover {
+    transform: scale(1.1);
+    /* Aumenta a imagem ao passar o mouse */
+}
+
+/* Container de cada miniatura */
+.miniatura {
+    position: relative;
+    /* Permite posicionar elementos filhos */
+    display: flex;
+    /* Flexbox para centralizar conteúdo */
+    align-items: center;
+    /* Centraliza verticalmente */
+    justify-content: center;
+    /* Centraliza horizontalmente */
+}
+
+/* Label que engloba botão e imagem */
+.miniatura-label {
+    position: relative;
+    /* Permite posicionar elementos filhos */
+    display: inline-block;
+    /* Exibe como bloco em linha */
+    cursor: pointer;
+    /* Cursor de clique */
+}
+
+/* Imagem dentro do label */
+.miniatura-label img {
+    display: block;
+    /* Remove espaço extra abaixo da imagem */
+    width: 300px;
+    /* Largura fixa */
+    transition: transform 0.2s;
+    /* Animação suave ao ampliar */
+}
+
+.miniatura-label:hover img {
+    transform: scale(1.1);
+    /* Aumenta a imagem ao passar o mouse */
+}
+
+/* Botão visual de seleção (círculo) */
+.radio {
+    position: absolute;
+    /* Posiciona em relação ao pai */
+    right: 12px;
+    /* Distância da direita */
+    width: 15px;
+    /* Largura do círculo */
+    height: 28px;
+    /* Altura do círculo */
+    accent-color: #000;
+    /* Cor de destaque do botão */
+    border-radius: 50%;
+    /* Deixa o botão redondo */
+    top: 1px;
+    /* Distância do topo */
+}
+
+/* Preenche o botão quando selecionado */
+.miniatura input[type="radio"]:checked+.miniatura-label .select-btn {
+    background: #000;
+    /* Preenche o círculo de preto */
+}
+
+/* Rodapé */
+footer {
+    background: #222;
+    /* Fundo escuro */
+    color: white;
+    /* Texto branco */
+    padding: 20px;
+    /* Espaçamento interno */
+}
+
+/* Botões do rodapé */
+.btn {
+    background: #ff0000;
+    /* Fundo vermelho */
+    padding: 12px 25px;
+    /* Espaçamento interno */
+    border-radius: 5px;
+    /* Bordas arredondadas */
+    color: white;
+    /* Texto branco */
+    
+    cursor: pointer;
+    /* Cursor de clique */
+    border: none;
+    /* Sem borda */
+    margin: 5px;
+    /* Espaço entre botões */
+}
+
+.avancar {
+    background: #666564;
+    /* Fundo cinza para o botão avançar */
+}
+
+/* Estilos adicionais para a barra de navegação */
+.navbar-principal .nav-content {
+    display: flex;
+    /* Flexbox para alinhar conteúdo */
+    align-items: center;
+    /* Centraliza verticalmente */
+    justify-content: space-between;
+    /* Espaço entre título e ícones */
+    padding: 0 15px;
+    /* Espaçamento lateral */
+}
+
+.nav-icons {
+    display: flex;
+    /* Flexbox para os ícones */
+    gap: 10px;
+    /* Espaço entre ícones */
+    align-items: center;
+    /* Centraliza verticalmente */
+}
+
+.nav-icons .icon {
+    width: 32px;
+    /* Largura dos ícones */
+    height: 32px;
+    /* Altura dos ícones */
+    cursor: pointer;
+    /* Cursor de clique */
+    transition: transform 0.2s;
+    /* Animação ao passar o mouse */
+}
+
+.nav-icons .icon:hover {
+    transform: scale(1.15);
+    /* Aumenta o ícone ao passar o mouse */
+}
+a{
+    text-decoration: none;
+    /* Remove sublinhado */
+    color: inherit;
+}
