@@ -77,7 +77,36 @@ nav ul {
     margin: 0;
     /* Remove margem padrão */
 }
+.banner {
+    background: url('../img/bannerHomeMoto.jpg') no-repeat center/cover;
+    padding: 40px;
+    color: white;
+    min-height: 300px;
+   
 
+}
+
+.btn-telainicial{
+    background: #ff0000;
+    color: #fff;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+    letter-spacing: 1px;
+    margin-top: 400px;
+    }
+
+    .btn-telainicial:hover {
+        background: #d40000;
+        transform: translateY(-2px) scale(1.04);
+}
 
 /* Barra de navegação das etapas como botões */
 .etapas-nav {
@@ -224,6 +253,8 @@ nav ul {
     /* Organiza filhos em coluna */
     text-align: center;
     /* Centraliza texto */
+    background-color: #464545;
+    color: white;
 }
 
 /* Lista de miniaturas */
@@ -394,4 +425,13 @@ a{
     text-decoration: none;
     /* Remove sublinhado */
     color: inherit;
+}
+
+.garage-info img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 16px auto;;
+    
 }

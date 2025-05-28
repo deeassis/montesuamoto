@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Moto</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body onload="loadGarage()">
+    <header>
+        <nav class="navbar-principal">
+            <div class="nav-content">
+                <img src="../img/logoFk.png" alt="logoFk">
+                <div class="nav-icons">
+                    <a href="https://wa.me/11975077424" target="_blank" title="WhatsApp">
+                        <img src="../img/whatsappLogo.png" alt="WhatsApp" class="icon">
+                    </a>
+                    <a href="#" title="Usuário">
+                        <img src="../img/usuario.png" alt="Usuário" class="icon">
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="motorcycle-preview">
+            <nav>
+                <ul class="etapas-nav">
+                    <li><button class="etapa-btn" onclick="switchPage('../pages/modelos.html')">1. Motos</button></li>
+                    <li><button class="etapa-btn" onclick="switchPage('../pages/cores.html')">2. Cores</button></li>
+                    <li><button class="etapa-btn" onclick="switchPage('../pages/adesivos.html')">3. Adesivos</button></li>
+                    <li><button class="etapa-btn" onclick="switchPage('../pages/minhaGaragem.html')">4. Minha Moto</button></li>
+                </ul>
+            </nav>
+            <div class="preview-container">
+                <img id="motoImg" src="" alt="Moto Personalizada">
+            </div>
+        </div>
+
+        <div class="options">
+    <div class="header-options">
+        <h2>Minha Garagem</h2>
+    </div>
+    <div class="garage-info">
+    <p>
+        <strong>Modelo:</strong> <span id="modeloSelecionado">-</span><br>
+        <img id="imgModeloSelecionado" src="" alt="Modelo">
+    </p>
+    <p>
+        <strong>Cor:</strong> <span id="corSelecionada">-</span><br>
+        <img id="imgCorSelecionada" src="" alt="Cor">
+    </p>
+    <p>
+        <strong>Adesivo:</strong> <span id="adesivoSelecionado">-</span><br>
+        <img id="imgAdesivoSelecionado" src="" alt="Adesivo">
+    </p>
+</div>
+</div>
+    </main>
+
+    <footer>
+        <p>Total: <strong>R$ 2135,00</strong></p>
+        <button class="btn" onclick="switchPage('../pages/adesivos.html')">Voltar</button>
+        <button class="btn" onclick="salvarMoto()">Salvar</button>
+        <button class="btn">Compartilhar</button>
+        
+    </footer>
+
+    <script src="../javaScript/script.js"></script>
+</body>
+</html>
