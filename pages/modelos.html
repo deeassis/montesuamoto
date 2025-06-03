@@ -4,13 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300&display=swap" rel="stylesheet">
     <title>Personalização de Motos</title>
-    <!-- Importa o arquivo de estilos -->
+    <!-- CSS exclusivo desta página -->
+
     <link rel="stylesheet" href="../css/styles.css">
+    <!-- Fonte Montserrat para visual moderno -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <!-- Cabeçalho com navegação principal -->
     <header>
         <nav class="navbar-principal">
             <div class="nav-content">
@@ -19,8 +22,8 @@
                     <a href="https://wa.me/11975077424" target="_blank" title="WhatsApp">
                         <img src="../img/whatsappLogo.png" alt="WhatsApp" class="icon">
                     </a>
-                    <a href="#" title="Usuário">
-                        <img src="../img/usuario.png" alt="Usuário" class="icon">
+                    <a href="./minhaGaragem.html?somenteCards=1" title="Usuário">
+                        <img id="navbarUserIcon" src="../img/usuario.png"  alt="Usuário"  class="icon">
                     </a>
                 </div>
             </div>
@@ -38,13 +41,12 @@
                     <li><button class="etapa-btn" onclick="switchPage('../pages/cores.html')">2. Cores</button></li>
                     <li><button class="etapa-btn" onclick="switchPage('../pages/adesivos.html')">3. Adesivos</button>
                     </li>
-                    <li><button class="etapa-btn" onclick="switchPage('../pages/minhaGaragem.html')">4. Minha
-                            Moto</button></li>
+                    <li><button class="etapa-btn" onclick="switchPage('../pages/minhaGaragem.html')">4. Minha Moto</button></li>
                 </ul>
             </nav>
             <div class="preview-container">
                 <!-- Imagem principal da moto selecionada -->
-                <img id="motoImg" src="img/xre190.png" alt="Moto Selecionada">
+                <img id="motoImg" src="../img/xre190.png" alt="Moto Selecionada">
             </div>
         </div>
 
@@ -53,46 +55,19 @@
             <div class="header-options">
                 <h2>Escolha sua Moto</h2>
             </div>
-            <div class="miniaturas">
-                <!-- Miniatura da XRE 190 -->
-                <div class="miniatura" data-model="xre190">
-                    <!-- Radio button oculto para seleção -->
-                    <input class="radio" type="radio" name="moto" id="moto-xre190" value="xre190" checked>
-                    <!-- Label que engloba o botão de seleção e a imagem -->
-                    <label for="moto-xre190" class="miniatura-label">
-                        <!-- Botão visual de seleção (círculo no canto superior direito) -->
-
-                        <!-- Imagem da moto -->
-                        <img onclick="selectModel('xre190')" src="../img/xre190.png" alt="XRE 190">
-                    </label>
-                </div>
-                <!-- Miniatura da Fan 160 -->
-                <div class="miniatura" data-model="fan160">
-                    <input class="radio" type="radio" name="moto" id="moto-fan160" value="fan160">
-                    <label for="moto-fan160" class="miniatura-label">
-
-                        <img onclick="selectModel('fan160')" src="../img/fan160.png" alt="Fan 160">
-                    </label>
-                </div>
-                <!-- Miniatura da CB 300F -->
-                <div class="miniatura" data-model="cb300f">
-                    <input class="radio" type="radio" name="moto" id="moto-cb300f" value="cb300f">
-                    <label for="moto-cb300f" class="miniatura-label">
-
-                        <img onclick="selectModel('cb300f')" src="../img/cb300f.png" alt="CB 300F">
-                    </label>
-                </div>
+            <div class="miniaturas" id="miniaturas-modelos">
+                <!-- Miniaturas serão carregadas via JS -->
             </div>
         </div>
     </main>
 
     <footer>
         <!-- Rodapé com total e botões de ação -->
-        <button class="btn" onclick="switchPage('index.html')">Voltar</button>
+        <a class="btn" href="../index.html">Voltar</a>
         <button class="btn avancar" onclick="switchPage('../pages/cores.html')" disabled>Avançar</button>
     </footer>
 
-    <!-- Importa o script JS -->
+    
     <script src="../javaScript/script.js"></script>
 </body>
 

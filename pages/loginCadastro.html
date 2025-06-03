@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login e Cadastro</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg,  #070707,#ff0000);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(95, 95, 95, 0.575);
+            width: 370px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px 0;
+            cursor: pointer;
+            font-weight: 700;
+            color: #4b4b4b;
+            border-bottom: 2px solid transparent;
+            transition: border 0.2s;
+        }
+        .tab.active {
+            border-bottom: 2px solid #ce0808;
+            color: #ce0808;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: stretch; /* Garante que os campos ocupem toda a largura */
+        }
+        input, button {
+            width: 100%; /* Faz os campos e botões ocuparem toda a largura do form */
+            box-sizing: border-box;
+        }
+        input {
+            padding: 12px;
+            border: 1px solid #e4e4e4;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.2s;
+            
+        }
+        input:focus {
+            border-color: #ff0000;
+        }
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%; /* Garante que o container ocupe toda a largura */
+        }
+        .password-container input[type="password"],
+        .password-container input[type="text"] {
+            flex: 1;
+            width: 100%; /* Garante que o input ocupe toda a largura do container */
+            min-width: 0; /* Evita overflow */
+        }
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #888;
+            user-select: none;
+        }
+        .toggle-password:hover {
+            color: #ce0808;
+        }
+        button {
+            padding: 12px;
+            background: #ce0808;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #535353;
+        }
+        .switch-link {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+        .switch-link a {
+            color: #ce0808;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .switch-link a:hover {
+            text-decoration: underline;
+        }
+        .error {
+            color: #e74c3c;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+        .success {
+            color: #e90000;
+            font-size: 0.95rem;
+            text-align: center;
+            margin-top: 4px;
+        }
+        .foto-perfil-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .foto-perfil-label {
+            font-size: 0.97rem;
+            color: #444;
+            font-weight: 500;
+        }
+        #previewFotoPerfil {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #fff;
+            background: #eee;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: block;
+            background-image: none;
+        }
+        .foto-perfil-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 18px;
+            position: relative;
+            width: 100%;
+        }
+        .foto-perfil-upload {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .upload-icone {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #ce0808;
+            color: #fff;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+            pointer-events: none;
+        }
+        .foto-perfil-upload input[type="file"] {
+            display: none;
+        }
+        .modal-titulo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+        .modal-titulo-content {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+        .modal-titulo h3 {
+            margin: 0 0 12px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .modal-titulo p {
+            margin: 0 0 24px;
+            font-size: 1rem;
+            color: #666;
+        }
+        .modal-titulo-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background: #ce0808;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: #535353;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" id="loginTab">Login</div>
+            <div class="tab" id="registerTab">Cadastro</div>
+        </div>
+        <form id="loginForm">
+            <input type="email" placeholder="E-mail" required>
+            <div class="password-container">
+                <input type="password" placeholder="Senha" required>
+                <span class="toggle-password" title="Mostrar/ocultar senha">&#128065;</span>
+            </div>
+            <button type="submit">Entrar</button>
+            <div class="switch-link">
+                Não tem uma conta? <a href="#" id="toRegister">Cadastre-se</a>
+            </div>
+            <div class="error" id="loginError"></div>
+        </form>
+        <form id="registerForm" style="display:none; align-items:center;">
+            <div class="foto-perfil-wrapper">
+                <label for="fotoPerfil" class="foto-perfil-upload">
+                    <img id="previewFotoPerfil" src="../img/usuario.png" alt="Foto de perfil" />
+                    <span class="upload-icone">&#x2B06;</span>
+                    <input type="file" id="fotoPerfil" accept="image/*" style="display:none;">
+                </label>
+            </div>
+            <input type="text" placeholder="Nome completo" required>
+            <input type="email" placeholder="E-mail" required>
+            <div class="password-container">
+                <input type="password" placeholder="Senha" required minlength="6">
+                <span class="toggle-password" title="Mostrar/ocultar senha">&#128065;</span>
+            </div>
+            <div class="password-container">
+                <input type="password" placeholder="Confirme a senha" required minlength="6">
+                <span class="toggle-password" title="Mostrar/ocultar senha">&#128065;</span>
+            </div>
+            <button type="submit">Cadastrar</button>
+            <div class="switch-link">
+                Já tem uma conta? <a href="#" id="toLogin">Entrar</a>
+            </div>
+            <div class="error" id="registerError"></div>
+            <div class="success" id="registerSuccess"></div>
+        </form>
+    </div>
+    <div id="modalCadastroSucesso" class="modal-titulo" style="display:none;">
+        <div class="modal-titulo-content">
+            <h3>Cadastro realizado com sucesso!</h3>
+            <p>Agora faça login.</p>
+            <div class="modal-titulo-actions">
+                <button class="btn" id="btnFecharModalCadastro">OK</button>
+            </div>
+        </div>
+    </div>
+    <script src="../javaScript/script.js"></script>
+</body>
+</html>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -17,8 +16,8 @@
                     <a href="https://wa.me/11975077424" target="_blank" title="WhatsApp">
                         <img src="../img/whatsappLogo.png" alt="WhatsApp" class="icon">
                     </a>
-                    <a href="#" title="Usuário">
-                        <img src="../img/usuario.png" alt="Usuário" class="icon">
+                    <a href="./minhaGaragem.html?somenteCards=1" title="Usuário">
+                        <img id="navbarUserIcon" src="../img/usuario.png"  alt="Usuário"  class="icon">
                     </a>
                 </div>
             </div>
@@ -48,14 +47,11 @@
         </div>
     </main>
 
-    <footer>
-        <!-- Rodapé com total e botões de ação -->
-        <p>Total: <strong>R$ 2135,00</strong></p>
+    <footer class="footer">
+    
         <button class="btn" onclick="switchPage('../pages/cores.html')">Voltar</button>
-        
-        <button class="btn avancar" onclick="switchPage('../pages/minhaGaragem.html')" disabled>Avançar</button>
+        <button class="btn avancar" onclick="avancarParaMinhaMoto()" disabled>Avançar</button>
     </footer>
-
     <script src="../javaScript/script.js"></script>
 </body>
 </html>

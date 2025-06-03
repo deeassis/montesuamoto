@@ -17,7 +17,7 @@
                         <img src="../img/whatsappLogo.png" alt="WhatsApp" class="icon">
                     </a>
                     <a href="#" title="Usuário">
-                        <img src="../img/usuario.png" alt="Usuário" class="icon">
+                       <img id="navbarUserIcon" src="../img/usuario.png"  alt="Usuário"  class="icon">
                     </a>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                     <li><button class="etapa-btn" onclick="switchPage('../pages/modelos.html')">1. Motos</button></li>
                     <li><button class="etapa-btn" onclick="switchPage('../pages/cores.html')">2. Cores</button></li>
                     <li><button class="etapa-btn" onclick="switchPage('../pages/adesivos.html')">3. Adesivos</button></li>
-                    <li><button class="etapa-btn" onclick="switchPage('../pages/minhaGaragem.html')">4. Minha Moto</button></li>
+                    <li><button class="etapa-btn active" onclick="switchPage('../pages/minhaGaragem.html')">4. Minha Moto</button></li>
                 </ul>
             </nav>
             <div class="preview-container">
@@ -40,33 +40,43 @@
         </div>
 
         <div class="options">
-    <div class="header-options">
-        <h2>Minha Garagem</h2>
-    </div>
-    <div class="garage-info">
-    <p>
-        <strong>Modelo:</strong> <span id="modeloSelecionado">-</span><br>
-        <img id="imgModeloSelecionado" src="" alt="Modelo">
-    </p>
-    <p>
-        <strong>Cor:</strong> <span id="corSelecionada">-</span><br>
-        <img id="imgCorSelecionada" src="" alt="Cor">
-    </p>
-    <p>
-        <strong>Adesivo:</strong> <span id="adesivoSelecionado">-</span><br>
-        <img id="imgAdesivoSelecionado" src="" alt="Adesivo">
-    </p>
-</div>
-</div>
+            <div class="header-options">
+                <h2>Minha Garagem</h2>
+            </div>
+            <div id="cardsGaragem" class="miniaturas"></div>
+        </div>
     </main>
 
     <footer>
-        <p>Total: <strong>R$ 2135,00</strong></p>
-        <button class="btn" onclick="switchPage('../pages/adesivos.html')">Voltar</button>
+        <p>Total: <strong id="totalGaragem">R$ 0,00</strong></p>
         <button class="btn" onclick="salvarMoto()">Salvar</button>
-        <button class="btn">Compartilhar</button>
+        <button class="btn" onclick="novoProjeto()">Novo projeto</button>
         
     </footer>
+
+    <!-- Modal para título do projeto -->
+    <div id="modalTitulo" class="modal-titulo" style="display:none;">
+        <div class="modal-titulo-content">
+            <h3>Dê um título para o seu projeto</h3>
+            <input type="text" id="inputTituloProjeto" maxlength="30" placeholder="Ex: Moto dos sonhos">
+            <div class="modal-titulo-actions">
+                <button class="btn" id="btnSalvarTitulo">Salvar</button>
+                <button class="btn" id="btnCancelarTitulo">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para confirmação de exclusão -->
+    <div id="modalExcluir" class="modal-titulo" style="display:none;">
+        <div class="modal-titulo-content">
+            <h3>Excluir projeto</h3>
+            <p>Deseja realmente excluir este projeto?</p>
+            <div class="modal-titulo-actions">
+                <button class="btn" id="btnConfirmarExcluir">Excluir</button>
+                <button class="btn" id="btnCancelarExcluir">Cancelar</button>
+            </div>
+        </div>
+    </div>
 
     <script src="../javaScript/script.js"></script>
 </body>

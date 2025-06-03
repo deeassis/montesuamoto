@@ -79,7 +79,7 @@ nav ul {
 }
 .banner {
     background: url('../img/bannerHomeMoto.jpg') no-repeat center/cover;
-    padding: 40px;
+    padding: 90px;
     color: white;
     min-height: 300px;
    
@@ -100,7 +100,7 @@ nav ul {
     transition: background 0.2s, transform 0.15s;
     display: inline-block;
     letter-spacing: 1px;
-    margin-top: 400px;
+    margin-top: 520px;
     }
 
     .btn-telainicial:hover {
@@ -255,6 +255,7 @@ nav ul {
     /* Centraliza texto */
     background-color: #464545;
     color: white;
+
 }
 
 /* Lista de miniaturas */
@@ -267,13 +268,22 @@ nav ul {
     /* Organiza miniaturas em coluna */
     align-items: center;
     /* Centraliza horizontalmente */
-    gap: 15px;
+    gap: 50px;
     /* Espaço entre miniaturas */
     justify-content: space-evenly;
     /* Espaço igual entre miniaturas */
     background-color: #464545;
-    /* Fundo cinza */
+    /* Fundo cinza */ 
+
+    /* Criar barrinha do lado */
+    max-height: 750px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #ff0000 #333;
+    
 }
+
 
 /* Imagens das miniaturas */
 .miniaturas img {
@@ -283,6 +293,7 @@ nav ul {
     /* Cursor de clique */
     transition: transform 0.2s ease-in-out;
     /* Animação suave ao ampliar */
+    
 }
 
 .miniaturas img:hover {
@@ -300,6 +311,8 @@ nav ul {
     /* Centraliza verticalmente */
     justify-content: center;
     /* Centraliza horizontalmente */
+    margin-top: 40px
+    
 }
 
 /* Label que engloba botão e imagem */
@@ -434,4 +447,121 @@ a{
     display: block;
     margin: 16px auto;;
     
+}
+
+/* Modal estilizado para título do projeto */
+.modal-titulo {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-titulo-content {
+    background: #fff;
+    padding: 32px 24px 24px 24px;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modal-titulo-content h3 {
+    margin-top: 0;
+    color: #ce0808;
+    font-weight: 700;
+}
+.modal-titulo-content input {
+    width: 90%;
+    padding: 10px;
+    margin: 18px 0 12px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1.1rem;
+}
+.modal-titulo-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Cards roláveis */
+#cardsGaragem {
+    max-height: 700px; /* 3 cards de ~60-70px cada + espaçamento */
+    overflow-y: auto;  /* ativa rolagem vertical */
+    overflow-x: hidden; /* impede rolagem horizontal */
+    scrollbar-width: thin;
+    scrollbar-color: #ff0000 #333;
+}
+#cardsGaragem::-webkit-scrollbar {
+    width: 3px;
+}
+#cardsGaragem::-webkit-scrollbar-thumb {
+    background: #ff0000;
+    border-radius: 4px;
+}
+.card-garagem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    background: #333;
+    border-radius: 8px;
+    width: 260px;
+    min-height: 60px;
+    border: 2px solid transparent;
+    position: relative;
+    margin-bottom: 4px;
+    transition: background 0.2s, border 0.2s;
+    padding: 50px 40px 50px 40px;
+}
+.card-garagem:first-child{
+    margin-top: 50px;
+    /* Espaço extra no topo do primeiro card */
+}
+.card-garagem.selected {
+    border: 2px solid #ff0000;
+    background: #222;
+}
+.card-garagem img {
+    width: 120px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 4px;
+    background: #fff;
+    
+    
+}
+.card-garagem-info {
+    color: #fff;
+    font-size: 0.85rem;
+    text-align: left;
+    line-height: 1.3;
+    flex: 1;
+    margin-left: -5px;
+}
+.btn-deletar-card {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 2;
+}
+.btn-deletar-card:hover {
+    background: #b30000;
 }
