@@ -1,92 +1,122 @@
+/* =========================
+   CSS GLOBAL (TODAS AS PÁGINAS)
+========================= */
 /* Reset e configurações básicas */
 html,
 body {
-    height: 100%;
-    /* Ocupa toda a altura da tela */
-    margin: 0;
-    /* Remove margens padrão */
-    padding: 0;
-    /* Remove preenchimento padrão */
-    overflow: hidden;
-    /* Impede rolagem da página */
-    font-family: 'Montserrat', Arial, sans-serif;
-    /* Fonte principal Montserrat para todo o projeto */
-    font-weight: 400;
-    /* Peso padrão 400 */
+    height: 100%; /* Ocupa toda a altura da tela */
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove preenchimento padrão */
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    font-family: 'Montserrat', Arial, sans-serif; /* Fonte principal */
+    font-weight: 400; /* Peso padrão */
 }
 
 body {
-    min-height: 100vh;
-    /* Garante altura mínima da viewport */
-    display: flex;
-    /* Usa flexbox para layout */
-    flex-direction: column;
-    /* Organiza filhos em coluna */
-    text-align: center;
-    /* Centraliza texto */
-    background-color: #f5f5f5;
-    /* Cor de fundo */
-    color: #333;
-    /* Cor do texto */
-    height: 100vh;
-    /* Garante altura exata da viewport */
-    box-sizing: border-box;
-    /* Inclui bordas e padding no cálculo da altura */
+    min-height: 100vh; /* Garante altura mínima da viewport */
+    display: flex; /* Usa flexbox para layout */
+    flex-direction: column; /* Organiza filhos em coluna */
+    text-align: center; /* Centraliza texto */
+    background-color: #f5f5f5; /* Cor de fundo */
+    color: #333; /* Cor do texto */
+    height: 100vh; /* Garante altura exata da viewport */
+    box-sizing: border-box; /* Inclui bordas e padding no cálculo da altura */
 }
 
-/* Layout principal */
-main {
-    flex: 1 1 0;
-    /* Ocupa espaço restante */
-    display: flex;
-    /* Usa flexbox para layout */
-    justify-content: space-between;
-    /* Espaço entre elementos */
-    padding: 0px;
-    /* Sem padding */
-    overflow: hidden;
-    /* Impede rolagem interna no main */
-    min-height: 0;
-    /* Permite que o conteúdo encolha para caber */
+a {
+    text-decoration: none; /* Remove sublinhado */
+    color: inherit;
 }
 
 /* Cabeçalho */
 header {
-    background-color: #222;
-    /* Fundo escuro */
-    color: white;
-    /* Texto branco */
-    padding: 2px;
-    /* Espaçamento interno */
+    background-color: #222; /* Fundo escuro */
+    color: white; /* Texto branco */
+    padding: 2px; /* Espaçamento interno */
 }
 
-/* Navegação das etapas */
-nav ul {
+/* Barra de navegação principal */
+.navbar-principal .nav-content {
     display: flex;
-    /* Flexbox para os itens */
-    justify-content: space-around;
-    /* Espaço igual entre itens */
-    background: #444;
-    /* Fundo escuro */
-    padding: 18px;
-    /* Espaçamento interno */
-    list-style: none;
-    /* Remove marcadores de lista */
-    color: white;
-    /* Texto branco */
-    margin: 0;
-    /* Remove margem padrão */
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
 }
+.nav-icons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.nav-icons .icon {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.nav-icons .icon:hover {
+    transform: scale(1.15);
+}
+
+/* Rodapé padrão */
+footer {
+    background: #222;
+    color: white;
+    padding: 20px;
+}
+.btn {
+    background: #ff0000;
+    padding: 12px 25px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    border: none;
+    margin: 5px;
+}
+.avancar {
+    background: #666564;
+}
+
+/* =========================
+   HOME (index.html)
+========================= */
 .banner {
-    background: url('../img/bannerHomeMoto.jpg') no-repeat center/cover;
+    background: linear-gradient(135deg, #000 0%, #ff0000 100%);
     padding: 90px;
     color: white;
     min-height: 300px;
-   
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
-
-.btn-telainicial{
+.banner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    z-index: 2;
+}
+.banner-content h1 {
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #ff0000, #ffffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-weight: 900;
+    font-size: 4rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 4px 16px rgba(0,0,0,0.6), 0 2px 8px #ff0000;
+    margin-bottom: 18px;
+}
+.banner-content p {
+    font-size: 1.3rem;
+    margin-bottom: 24px;
+    max-width: 800px;
+    text-align: center;
+}
+.btn-telainicial {
     background: #ff0000;
     color: #fff;
     padding: 14px 32px;
@@ -100,356 +130,249 @@ nav ul {
     transition: background 0.2s, transform 0.15s;
     display: inline-block;
     letter-spacing: 1px;
-    margin-top: 520px;
-    }
-
-    .btn-telainicial:hover {
-        background: #d40000;
-        transform: translateY(-2px) scale(1.04);
+    margin-top: 32px;
+}
+.btn-telainicial:hover {
+    background: #d40000;
+    transform: translateY(-2px) scale(1.04);
 }
 
-/* Barra de navegação das etapas como botões */
-.etapas-nav {
+/* =========================
+   ETAPAS (Modelos, Cores, Adesivos, Minha Garagem)
+========================= */
+/* Layout principal das páginas de etapas */
+main {
+    flex: 1 1 0;
     display: flex;
-    /* Flexbox para dividir igualmente */
-    padding: 0;
-    /* Remove padding padrão */
-    margin: 0;
-    /* Remove margem padrão */
-    list-style: none;
-    /* Remove marcadores */
-    background: #444;
-    /* Fundo escuro */
-    height: 53px;
-    /* Altura fixa */
+    justify-content: space-between;
+    padding: 0px;
+    overflow: hidden;
+    min-height: 0;
 }
 
+/* Barra de navegação das etapas */
+nav ul, .etapas-nav {
+    display: flex;
+    justify-content: space-around;
+    background: #444;
+    list-style: none;
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 53px;
+}
 .etapas-nav li {
     flex: 1;
-    /* Cada item ocupa espaço igual */
     display: flex;
-    /* Flex para centralizar botão */
     align-items: stretch;
-    /* Estica o botão verticalmente */
 }
-
 .etapa-btn {
     font-family: 'Montserrat', Arial, sans-serif;
-    /* Garante Montserrat */
     font-weight: 400;
-    /* Peso padrão 400 */
     flex: 1;
-    /* Ocupa todo o espaço do li */
     background: transparent;
-    /* Fundo transparente */
     color: #fff;
-    /* Texto branco */
     border: none;
-    /* Sem borda padrão */
     outline: none;
-    /* Sem contorno ao focar */
     font-size: 1.1rem;
-    /* Tamanho da fonte */
     cursor: pointer;
-    /* Cursor de clique */
     position: relative;
-    /* Para barra ativa */
     transition: background 0.2s;
     border-bottom: 4px solid transparent;
-    /* Barra inferior padrão invisível */
 }
-
 .etapa-btn.active,
 .etapa-btn:focus {
     border-bottom: 4px solid #ff0000;
-    /* Barra inferior vermelha no ativo */
     background: #333;
-    /* Fundo levemente diferente */
     color: #fff;
-    /* Mantém texto branco */
 }
-
-/* Remove espaçamento entre botões */
 .etapas-nav li + li .etapa-btn {
     border-left: 1px solid #555;
-    /* Linha divisória opcional */
 }
 
 /* Área de pré-visualização */
 .motorcycle-preview {
     flex: 4;
-    /* Ocupa maior parte do espaço */
     text-align: center;
-    /* Centraliza conteúdo */
     margin-left: -20px;
-    /* Ajuste de margem à esquerda */
     display: flex;
-    /* Flexbox para layout interno */
     flex-direction: column;
-    /* Organiza filhos em coluna */
     position: relative;
-    /* Permite posicionamento absoluto de filhos */
 }
-
 .motorcycle-preview nav {
     height: 53px;
-    /* Altura fixa da barra de etapas */
 }
-
-.header-options {
-    display: flex;
-    /* Flexbox */
-    height: 53px;
-    /* Altura fixa */
-    align-items: center;
-    /* Centraliza verticalmente */
-    justify-content: center;
-    /* Centraliza horizontalmente */
-    background-color: rgb(85, 85, 85);
-    /* Fundo cinza escuro */
-    color: white;
-    /* Texto branco */
-}
-
-.header-options h2 {
-    font-family: 'Montserrat', Arial, sans-serif;
-    /* Garante Montserrat */
-    font-weight: 400;
-    /* Peso padrão 400 */
-}
-
 .motorcycle-preview img {
     width: 70%;
-    /* Imagem ocupa 70% da largura */
     height: auto;
-    /* Mantém proporção da imagem */
     display: block;
-    /* Remove espaço extra */
     margin-left: auto;
-    /* Centraliza horizontalmente */
     margin-right: auto;
-    /* Centraliza horizontalmente */
 }
-
-/* Container da imagem de preview */
 .preview-container {
     flex: 1;
-    /* Ocupa espaço disponível */
     display: flex;
-    /* Flexbox para centralizar */
     align-items: center;
-    /* Centraliza verticalmente */
     background-color: #2e2e2e;
-    /* Fundo escuro */
 }
 
 /* Área de opções */
 .options {
     flex: 1;
-    /* Ocupa menos espaço que preview */
     display: flex;
-    /* Flexbox para layout interno */
     flex-direction: column;
-    /* Organiza filhos em coluna */
     text-align: center;
-    /* Centraliza texto */
     background-color: #464545;
     color: white;
-
+}
+.header-options {
+    display: flex;
+    height: 53px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(85, 85, 85);
+    color: white;
+}
+.header-options h2 {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 400;
 }
 
-/* Lista de miniaturas */
+/* Miniaturas (Modelos, Cores, Adesivos, Garagem) */
 .miniaturas {
     display: flex;
-    /* Flexbox para miniaturas */
     flex: 1;
-    /* Ocupa espaço disponível */
     flex-direction: column;
-    /* Organiza miniaturas em coluna */
     align-items: center;
-    /* Centraliza horizontalmente */
     gap: 50px;
-    /* Espaço entre miniaturas */
     justify-content: space-evenly;
-    /* Espaço igual entre miniaturas */
     background-color: #464545;
-    /* Fundo cinza */ 
-
-    /* Criar barrinha do lado */
     max-height: 750px;
     overflow-y: auto;
     overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: #ff0000 #333;
-    
 }
-
-
-/* Imagens das miniaturas */
 .miniaturas img {
     width: 300px;
-    /* Largura fixa das miniaturas */
     cursor: pointer;
-    /* Cursor de clique */
     transition: transform 0.2s ease-in-out;
-    /* Animação suave ao ampliar */
-    
 }
-
 .miniaturas img:hover {
     transform: scale(1.1);
-    /* Aumenta a imagem ao passar o mouse */
 }
-
-/* Container de cada miniatura */
 .miniatura {
     position: relative;
-    /* Permite posicionar elementos filhos */
     display: flex;
-    /* Flexbox para centralizar conteúdo */
     align-items: center;
-    /* Centraliza verticalmente */
     justify-content: center;
-    /* Centraliza horizontalmente */
-    margin-top: 40px
-    
+    margin-top: 40px;
 }
-
-/* Label que engloba botão e imagem */
 .miniatura-label {
     position: relative;
-    /* Permite posicionar elementos filhos */
     display: inline-block;
-    /* Exibe como bloco em linha */
     cursor: pointer;
-    /* Cursor de clique */
 }
-
-/* Imagem dentro do label */
 .miniatura-label img {
     display: block;
-    /* Remove espaço extra abaixo da imagem */
     width: 300px;
-    /* Largura fixa */
     transition: transform 0.2s;
-    /* Animação suave ao ampliar */
 }
-
 .miniatura-label:hover img {
     transform: scale(1.1);
-    /* Aumenta a imagem ao passar o mouse */
 }
-
-/* Botão visual de seleção (círculo) */
 .radio {
     position: absolute;
-    /* Posiciona em relação ao pai */
     right: 12px;
-    /* Distância da direita */
     width: 15px;
-    /* Largura do círculo */
     height: 28px;
-    /* Altura do círculo */
     accent-color: #000;
-    /* Cor de destaque do botão */
     border-radius: 50%;
-    /* Deixa o botão redondo */
     top: 1px;
-    /* Distância do topo */
 }
-
-/* Preenche o botão quando selecionado */
 .miniatura input[type="radio"]:checked+.miniatura-label .select-btn {
     background: #000;
-    /* Preenche o círculo de preto */
 }
 
-/* Rodapé */
-footer {
-    background: #222;
-    /* Fundo escuro */
-    color: white;
-    /* Texto branco */
-    padding: 20px;
-    /* Espaçamento interno */
+/* =========================
+   MINHA GARAGEM (minhaGaragem.html)
+========================= */
+#cardsGaragem {
+    max-height: 700px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #ff0000 #333;
 }
-
-/* Botões do rodapé */
-.btn {
+#cardsGaragem::-webkit-scrollbar {
+    width: 3px;
+}
+#cardsGaragem::-webkit-scrollbar-thumb {
     background: #ff0000;
-    /* Fundo vermelho */
-    padding: 12px 25px;
-    /* Espaçamento interno */
-    border-radius: 5px;
-    /* Bordas arredondadas */
-    color: white;
-    /* Texto branco */
-    
-    cursor: pointer;
-    /* Cursor de clique */
+    border-radius: 4px;
+}
+.card-garagem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    background: #333;
+    border-radius: 8px;
+    width: 260px;
+    min-height: 60px;
+    border: 2px solid transparent;
+    position: relative;
+    margin-bottom: 4px;
+    transition: background 0.2s, border 0.2s;
+    padding: 50px 40px 50px 40px;
+}
+.card-garagem:first-child{
+    margin-top: 50px;
+}
+.card-garagem.selected {
+    border: 2px solid #ff0000;
+    background: #222;
+}
+.card-garagem img {
+    width: 120px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 4px;
+    background: #fff;
+}
+.card-garagem-info {
+    color: #fff;
+    font-size: 0.85rem;
+    text-align: left;
+    line-height: 1.3;
+    flex: 1;
+    margin-left: -5px;
+}
+.btn-deletar-card {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #ff0000;
+    color: #fff;
     border: none;
-    /* Sem borda */
-    margin: 5px;
-    /* Espaço entre botões */
-}
-
-.avancar {
-    background: #666564;
-    /* Fundo cinza para o botão avançar */
-}
-
-/* Estilos adicionais para a barra de navegação */
-.navbar-principal .nav-content {
-    display: flex;
-    /* Flexbox para alinhar conteúdo */
-    align-items: center;
-    /* Centraliza verticalmente */
-    justify-content: space-between;
-    /* Espaço entre título e ícones */
-    padding: 0 15px;
-    /* Espaçamento lateral */
-}
-
-.nav-icons {
-    display: flex;
-    /* Flexbox para os ícones */
-    gap: 10px;
-    /* Espaço entre ícones */
-    align-items: center;
-    /* Centraliza verticalmente */
-}
-
-.nav-icons .icon {
-    width: 32px;
-    /* Largura dos ícones */
-    height: 32px;
-    /* Altura dos ícones */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 1rem;
     cursor: pointer;
-    /* Cursor de clique */
-    transition: transform 0.2s;
-    /* Animação ao passar o mouse */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 2;
+}
+.btn-deletar-card:hover {
+    background: #b30000;
 }
 
-.nav-icons .icon:hover {
-    transform: scale(1.15);
-    /* Aumenta o ícone ao passar o mouse */
-}
-a{
-    text-decoration: none;
-    /* Remove sublinhado */
-    color: inherit;
-}
-
-.garage-info img {
-    max-width: 300px;
-    width: 100%;
-    height: auto;
-    display: block;
-    margin: 16px auto;;
-    
-}
-
-/* Modal estilizado para título do projeto */
+/* =========================
+   MODAL (usado em várias páginas)
+========================= */
 .modal-titulo {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -489,79 +412,129 @@ a{
     width: 100%;
 }
 
-/* Cards roláveis */
-#cardsGaragem {
-    max-height: 700px; /* 3 cards de ~60-70px cada + espaçamento */
-    overflow-y: auto;  /* ativa rolagem vertical */
-    overflow-x: hidden; /* impede rolagem horizontal */
-    scrollbar-width: thin;
-    scrollbar-color: #ff0000 #333;
+/* =========================
+   LOGIN/CADASTRO (loginCadastro.html)
+   (Obs: O CSS principal dessa página está inline no próprio HTML)
+========================= */
+
+/* =========================
+   OUTROS (ajustes gerais)
+========================= */
+.garage-info img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 16px auto;
 }
-#cardsGaragem::-webkit-scrollbar {
-    width: 3px;
+
+/* =========================
+   SOBRE (sobre.html)
+========================= */
+.sobre {
+    background: linear-gradient(120deg, #3a3a3a 60%, #ff3c3c 100%);
+    padding: 60px 0 50px 0;
+    margin-top: 0;
 }
-#cardsGaragem::-webkit-scrollbar-thumb {
-    background: #ff0000;
-    border-radius: 4px;
-}
-.card-garagem {
+.sobre-container {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 15px;
-    background: #333;
-    border-radius: 8px;
-    width: 260px;
-    min-height: 60px;
-    border: 2px solid transparent;
-    position: relative;
-    margin-bottom: 4px;
-    transition: background 0.2s, border 0.2s;
-    padding: 50px 40px 50px 40px;
+    justify-content: center;
+    max-width: 1100px;
+    margin: 0 auto 40px auto;
+    gap: 40px;
 }
-.card-garagem:first-child{
-    margin-top: 50px;
-    /* Espaço extra no topo do primeiro card */
-}
-.card-garagem.selected {
-    border: 2px solid #ff0000;
-    background: #222;
-}
-.card-garagem img {
-    width: 120px;
-    height: 100px;
-    object-fit: contain;
-    border-radius: 4px;
-    background: #fff;
-    
-    
-}
-.card-garagem-info {
-    color: #fff;
-    font-size: 0.85rem;
+.sobre-texto {
+    flex: 2;
+    min-width: 320px;
     text-align: left;
-    line-height: 1.3;
-    flex: 1;
-    margin-left: -5px;
+    color: #ffffff;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    padding: 0 0px;
 }
-.btn-deletar-card {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    background: #ff0000;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    font-size: 1rem;
-    cursor: pointer;
+.sobre-texto h2 {
+    color: #ce0808;
+    font-size: 2.3rem;
+    margin-bottom: 18px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+.sobre-texto strong {
+    color: #ff0000;
+}
+.sobre-localizacao {
+    color: #ff0000;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+.sobre-texto em {
+    color: #ff0000;
+    font-weight: 600;
+    font-size: 1.08rem;
+}
+.sobre-img {
+    flex: 1;
+    min-width: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s;
-    z-index: 2;
+    margin-top: 50px;
+    
+    
 }
-.btn-deletar-card:hover {
-    background: #b30000;
+.sobre-img img {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    border: 4px solid #fff;
+    background: #fff;
+    margin-left: 50px;
+}
+
+/* Carrossel de Imagens */
+.carrossel {
+    background: #000;
+    border-radius: 0;
+    padding: 15px 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+    max-width: 100vw;
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.carrossel-imagens {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(.4,0,.2,1);
+    will-change: transform;
+    width: 100%;
+}
+.carrossel-img {
+    min-width: 25%;
+    max-width: 25%;
+    margin: 0;
+    height: 260px;
+    object-fit: contain;
+    border-radius: 0;
+    background: #000000;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    display: block;
+}
+@media (max-width: 900px) {
+    .carrossel-img {
+        min-width: 50%;
+        max-width: 50%;
+        height: 140px;
+    }
+}
+@media (max-width: 600px) {
+    .carrossel-img {
+        min-width: 100%;
+        max-width: 100%;
+        height: 100px;
+    }
 }

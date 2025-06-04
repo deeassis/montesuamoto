@@ -517,6 +517,22 @@ function loadGarage() {
             });
         }
     }
+
+    // Se não há cards ou nenhum foi clicado, mostra o valor do adesivo selecionado atualmente
+    if (totalElement) {
+        let previewAdesivo = localStorage.getItem('selectedSticker') || '';
+        const valoresAdesivos = {
+            mod1: 150,
+            mod2: 200,
+            mod3: 250,
+            mod4: 150
+        };
+        if (previewAdesivo && valoresAdesivos[previewAdesivo]) {
+            totalElement.textContent = `R$ ${valoresAdesivos[previewAdesivo].toFixed(2).replace('.', ',')}`;
+        } else {
+            totalElement.textContent = 'R$ 0,00';
+        }
+    }
 }
 
 // Função para abrir o modal de título
@@ -735,6 +751,22 @@ function loadGarage() {
 
                 cardsContainer.appendChild(card);
             });
+        }
+    }
+
+    // Se não há cards ou nenhum foi clicado, mostra o valor do adesivo selecionado atualmente
+    if (totalElement) {
+        let previewAdesivo = localStorage.getItem('selectedSticker') || '';
+        const valoresAdesivos = {
+            mod1: 150,
+            mod2: 200,
+            mod3: 250,
+            mod4: 150
+        };
+        if (previewAdesivo && valoresAdesivos[previewAdesivo]) {
+            totalElement.textContent = `R$ ${valoresAdesivos[previewAdesivo].toFixed(2).replace('.', ',')}`;
+        } else {
+            totalElement.textContent = 'R$ 0,00';
         }
     }
 }
@@ -961,4 +993,62 @@ if (userIcon) {
         userIcon.src = '../img/usuario.png'; // Caminho do ícone padrão
     }
 }
+
+// Carrossel de imagens da página inicial
+document.addEventListener('DOMContentLoaded', function() {
+    const imgs = document.querySelectorAll('.carrossel-img');
+    const prevBtn = document.querySelector('.carrossel-btn.prev');
+    const nextBtn = document.querySelector('.carrossel-btn.next');
+    if (!imgs.length) return;
+
+    let idx = 0;
+
+    function showImg(i) {
+        imgs.forEach((img, j) => {
+            img.classList.toggle('active', j === i);
+        });
+    }
+
+    prevBtn.addEventListener('click', () => {
+        idx = (idx - 1 + imgs.length) % imgs.length;
+        showImg(idx);
+    });
+
+    nextBtn.addEventListener('click', () => {
+        idx = (idx + 1) % imgs.length;
+        showImg(idx);
+    });
+
+    // Troca automática a cada 5 segundos
+    setInterval(() => {
+        idx = (idx + 1) % imgs.length;
+        showImg(idx);
+    }, 5000);
+});
+
+// Carrossel de imagens da página inicial (4 em 4, sem botões)
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.carrossel-imagens');
+    const imgs = document.querySelectorAll('.carrossel-img');
+    if (!container || imgs.length === 0) return;
+
+    const total = imgs.length;
+    const visible = 4;
+    let idx = 0;
+
+    function updateCarousel() {
+        const width = imgs[0].offsetWidth + parseInt(getComputedStyle(imgs[0]).marginLeft) + parseInt(getComputedStyle(imgs[0]).marginRight);
+        container.style.transform = `translateX(-${idx * width}px)`;
+    }
+
+    function nextSlide() {
+        idx += visible;
+        if (idx >= total) idx = 0;
+        updateCarousel();
+    }
+
+    // Inicializa
+    updateCarousel();
+    setInterval(nextSlide, 8000);
+});
 
