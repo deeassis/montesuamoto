@@ -4,10 +4,12 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     // Captura os valores dos campos
     const nome = document.querySelector("#registerForm input[type='text']").value;
     const email = document.querySelector("#registerForm input[type='email']").value;
-    const senha = document.querySelectorAll("#registerForm input[type='password']")[0].value;
-    const confirmarSenha = document.querySelectorAll("#registerForm input[type='password']")[1].value;
+    const senha = document.getElementById("createSenha").value;
+    const confirmarSenha = document.getElementById("confirmSenha").value;
     const fotoInput = document.querySelector("#fotoPerfil");
 
+
+    console.log("Nome:", senha);
     // Validação básica
     if (senha !== confirmarSenha) {
         document.getElementById("registerError").textContent = "As senhas não coincidem!";
@@ -22,16 +24,16 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         reader.readAsDataURL(file);
         reader.onload = function () {
             fotoPerfilBase64 = reader.result;
-            enviarDados(nome, email, senha, fotoPerfilBase64);
+            enviarDados(nome, email, senha,  fotoPerfilBase64);
         };
     } else {
-        enviarDados(nome, email, senha, fotoPerfilBase64);
+        enviarDados(nome, email, senha,  fotoPerfilBase64);
     }
 });
 
 async function enviarDados(nome, email, senha, fotoPerfil) {
     try {
-        const response = await fetch("http://localhost:8080/usuarios", {
+        const response = await fetch("http://10.92.195.72:8080/usuarios", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ nome, email, senha, fotoPerfil, tipo: "USER" }),

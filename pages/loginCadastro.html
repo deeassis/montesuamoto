@@ -262,11 +262,11 @@
             <input type="text" placeholder="Nome completo" required>
             <input type="email" placeholder="E-mail" required>
             <div class="password-container">
-                <input type="password" placeholder="Senha" required minlength="6">
+                <input type="password" placeholder="Senha" id="createSenha" required minlength="6">
                 <span class="toggle-password" title="Mostrar/ocultar senha">&#128065;</span>
             </div>
             <div class="password-container">
-                <input type="password" placeholder="Confirme a senha" required minlength="6">
+                <input type="password" id="confirmSenha" placeholder="Confirme a senha" required minlength="6">
                 <span class="toggle-password" title="Mostrar/ocultar senha">&#128065;</span>
             </div>
             <button type="submit">Cadastrar</button>
@@ -287,6 +287,8 @@
         </div>
     </div>
     <script src="../javaScript/script.js"></script>
+    <script src="../javaScript/login.js"></script>
     <script src="../javaScript/cadastro.js"></script>
+    
 </body>
 </html>

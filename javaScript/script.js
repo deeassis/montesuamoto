@@ -8,6 +8,11 @@ function switchPage(url) {
     window.location.href = url;
 }
 
+   const totalElement = document.getElementById('totalGaragem');
+    if (totalElement) {
+        totalElement.textContent = "R$ 0,00";
+    }
+
 // --------- LOGIN E CADASTRO ---------
 document.addEventListener('DOMContentLoaded', function() {
     // Elementos
@@ -18,10 +23,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const toRegister = document.getElementById('toRegister');
     const toLogin = document.getElementById('toLogin');
     const loginError = document.getElementById('loginError');
+
     const registerError = document.getElementById('registerError');
     const registerSuccess = document.getElementById('registerSuccess');
     const fotoInput = document.getElementById('fotoPerfil');
     const previewFotoPerfil = document.getElementById('previewFotoPerfil');
+        // Atualiza o valor total
+ 
 
     // Utilitários
     function validarEmail(email) {
@@ -70,36 +78,36 @@ document.addEventListener('DOMContentLoaded', function() {
     toLogin.onclick = (e) => { e.preventDefault(); showLogin(); };
 
     // Login
-    loginForm.onsubmit = function(e) {
-        e.preventDefault();
-        const emailInput = loginForm.querySelector('input[type="email"]');
-        const senhaInput = loginForm.querySelector('input[type="password"]');
-        const email = emailInput.value.trim();
-        const senha = senhaInput.value;
+    // loginForm.onsubmit = function(e) {
+    //     e.preventDefault();
+    //     const emailInput = loginForm.querySelector('input[type="email"]');
+    //     const senhaInput = loginForm.querySelector('input[type="password"]');
+    //     const email = emailInput.value.trim();
+    //     const senha = senhaInput.value;
 
-        marcarErro(emailInput, !validarEmail(email));
-        marcarErro(senhaInput, senha.length < 6);
+    //     marcarErro(emailInput, !validarEmail(email));
+    //     marcarErro(senhaInput, senha.length < 6);
 
-        if (!validarEmail(email)) {
-            loginError.textContent = 'E-mail inválido.';
-            return;
-        }
-        if (senha.length < 6) {
-            loginError.textContent = 'Senha deve ter pelo menos 6 caracteres.';
-            return;
-        }
+    //     if (!validarEmail(email)) {
+    //         loginError.textContent = 'E-mail inválido.';
+    //         return;
+    //     }
+    //     if (senha.length < 6) {
+    //         loginError.textContent = 'Senha deve ter pelo menos 6 caracteres.';
+    //         return;
+    //     }
 
-        const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-        const usuario = usuarios.find(u => u.email === email && u.senha === senha);
+    //     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+    //     const usuario = usuarios.find(u => u.email === email && u.senha === senha);
 
-        if (usuario) {
-            loginError.textContent = '';
-            localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
-            window.location.href = '../pages/modelos.html';
-        } else {
-            loginError.textContent = 'E-mail ou senha inválidos.';
-        }
-    };
+    //     if (usuario) {
+    //         loginError.textContent = '';
+    //         localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+    //         window.location.href = '../pages/modelos.html';
+    //     } else {
+    //         loginError.textContent = 'E-mail ou senha inválidos.';
+    //     }
+    // };
 
     // Pré-visualização da foto de perfil
     if (fotoInput && previewFotoPerfil) {
@@ -580,13 +588,44 @@ function salvarMoto() {
             return;
         }
         const garagemKey = 'garagem_' + usuarioLogado.email;
+        const valor = totalElement.textContent
+        console.log(valor)
+
+        const valorFormatado = parseFloat(valor.replace(/[^\d,-]/g, "").replace(/\./g, "").replace(",", "."))
+console.log(valorFormatado)
         const moto = {
-            id: Date.now(),
             modelo,
             cor,
             adesivo,
-            titulo
+            titulo,
+            valor: valorFormatado,
+            imagemFinal: `${modelo}_${cor}_${adesivo}.png`,
+            usuario: {
+                id: usuarioLogado.id,
+            }
         };
+
+       fetch(`http://10.92.195.72:8080/garagem/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(moto)
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao salvar a moto');
+            }
+            return response.json();
+        }).then(resposta => {
+            console.log('Moto salva com sucesso:', resposta);
+            // alert('Moto salva com sucesso!');
+        
+            // aqui comeca omodal da denise
+        }).catch(error => {
+            console.error('Erro ao salvar a moto:', error);
+        });
+
+
         let garagem = JSON.parse(localStorage.getItem(garagemKey)) || [];
         garagem.push(moto);
         localStorage.setItem(garagemKey, JSON.stringify(garagem));
@@ -678,11 +717,7 @@ function loadGarage() {
         }
     }
 
-    // Atualiza o valor total
-    const totalElement = document.getElementById('totalGaragem');
-    if (totalElement) {
-        totalElement.textContent = "R$ 0,00";
-    }
+
 
     // Exibir cards das motos salvas
     const cardsContainer = document.getElementById('cardsGaragem');
@@ -984,14 +1019,44 @@ function novoProjeto() {
     window.location.href = '../pages/modelos.html';
 }
 
+
+
 const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || '{}');
-const userIcon = document.getElementById('navbarUserIcon');
-if (userIcon) {
-    if (usuarioLogado.fotoPerfil && usuarioLogado.fotoPerfil.startsWith('data:image/')) {
-        userIcon.src = usuarioLogado.fotoPerfil;
-    } else {
-        userIcon.src = '../img/usuario.png'; // Caminho do ícone padrão
-    }
+const userIcon = document.getElementById("navbarUserIcon");
+const dropdownMenu = document.getElementById("userDropdownMenu");
+const userNameEl = document.getElementById("userNome");
+const logoutBtn = document.getElementById("logoutBtn");
+
+// Mostra o nome do usuário, se existir
+if (userNameEl && usuarioLogado && usuarioLogado.nome) {
+    userNameEl.textContent = usuarioLogado.nome.split(" ")[0];
+}
+
+// Troca a foto do usuário, se existir
+if (userIcon && usuarioLogado.fotoPerfil && usuarioLogado.fotoPerfil.startsWith('data:image/')) {
+    userIcon.src = usuarioLogado.fotoPerfil;
+}
+
+// Toggle do menu dropdown ao clicar no ícone do usuário
+if (userIcon && dropdownMenu) {
+    userIcon.addEventListener("click", (event) => {
+        event.stopPropagation();
+        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+    });
+
+    // Fecha o menu ao clicar fora
+    document.addEventListener("click", () => {
+        dropdownMenu.style.display = "none";
+    });
+}
+
+// Logout
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("usuarioLogado");
+        localStorage.removeItem("token");
+        window.location.href = "/index.html";
+    });
 }
 
 // Carrossel de imagens da página inicial
@@ -1051,4 +1116,3 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCarousel();
     setInterval(nextSlide, 8000);
 });
-

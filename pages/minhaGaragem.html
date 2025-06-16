@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,28 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body onload="loadGarage()">
     <header>
         <nav class="navbar-principal">
             <div class="nav-content">
-                <img src="../img/logoFk.png" alt="logoFk">
+                    <a href="/index.html">   <img src="../img/logoFk.png" alt="logoFk"></a>
                 <div class="nav-icons">
                     <a href="https://wa.me/11975077424" target="_blank" title="WhatsApp">
                         <img src="../img/whatsappLogo.png" alt="WhatsApp" class="icon">
                     </a>
-                    <a href="#" title="Usuário">
-                       <img id="navbarUserIcon" src="../img/usuario.png"  alt="Usuário"  class="icon">
-                    </a>
+                    <div class="user-menu-wrapper">
+    <img id="navbarUserIcon" src="../img/usuario.png" alt="Usuário" class="icon" />
+    <div id="userDropdownMenu" class="dropdown-menu">
+        <p class="user-name">Olá, <span id="userNome">Usuário</span> 👋</p>
+        <a href="./perfil.html">Meu Perfil</a>
+        <a href="./minhaGaragem.html">Minha Garagem</a>
+        <button id="logoutBtn">Sair</button>
+    </div>
+</div>
+
+                    </div>
+
                 </div>
             </div>
         </nav>
@@ -30,8 +41,10 @@
                 <ul class="etapas-nav">
                     <li><button class="etapa-btn" onclick="switchPage('../pages/modelos.html')">1. Motos</button></li>
                     <li><button class="etapa-btn" onclick="switchPage('../pages/cores.html')">2. Cores</button></li>
-                    <li><button class="etapa-btn" onclick="switchPage('../pages/adesivos.html')">3. Adesivos</button></li>
-                    <li><button class="etapa-btn active" onclick="switchPage('../pages/minhaGaragem.html')">4. Minha Moto</button></li>
+                    <li><button class="etapa-btn" onclick="switchPage('../pages/adesivos.html')">3. Adesivos</button>
+                    </li>
+                    <li><button class="etapa-btn active" onclick="switchPage('../pages/minhaGaragem.html')">4. Minha
+                            Moto</button></li>
                 </ul>
             </nav>
             <div class="preview-container">
@@ -52,7 +65,7 @@
         <button class="btn" onclick="salvarMoto()">Salvar</button>
         <button class="btn" onclick="novoProjeto()">Novo projeto</button>
         <button class="btn" onclick="window.open('https://wa.me/11975077424', '_blank')">Produzir Projeto</button>
-        
+
     </footer>
 
     <!-- Modal para título do projeto -->
@@ -67,18 +80,19 @@
         </div>
     </div>
 
-    <!-- Modal para confirmação de exclusão -->
-    <div id="modalExcluir" class="modal-titulo" style="display:none;">
+    <!-- Modal de Confirmação -->
+    <div id="modalConfirmacao" class="modal-titulo" style="display:none;">
         <div class="modal-titulo-content">
             <h3>Excluir projeto</h3>
-            <p>Deseja realmente excluir este projeto?</p>
+            <p>Tem certeza que deseja excluir este projeto? Essa ação não pode ser desfeita.</p>
             <div class="modal-titulo-actions">
-                <button class="btn" id="btnConfirmarExcluir">Excluir</button>
-                <button class="btn" id="btnCancelarExcluir">Cancelar</button>
+                <button class="btn" id="btnConfirmarExclusao">Excluir</button>
+                <button class="btn" id="btnCancelarExclusao">Cancelar</button>
             </div>
         </div>
     </div>
-
+    <script src="../javaScript/modelosCorAdesivos.js"></script>
     <script src="../javaScript/script.js"></script>
 </body>
+
 </html>

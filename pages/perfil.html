@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .perfil-container {
+            max-width: 420px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(95, 95, 95, 0.18);
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .perfil-foto {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #fff;
+            background: #eee;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 18px;
+        }
+        .perfil-info {
+            width: 100%;
+            margin-bottom: 18px;
+        }
+        .perfil-info label {
+            font-weight: bold;
+            color: #ce0808;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .perfil-info input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+        .perfil-actions {
+            margin-top: 18px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .perfil-foto-upload {
+            margin-bottom: 18px;
+        }
+        .perfil-foto-upload input[type="file"] {
+            display: none;
+        }
+        .perfil-foto-upload label {
+            cursor: pointer;
+            color: #ce0808;
+            font-size: 0.98rem;
+            text-decoration: underline;
+        }
+        .perfil-tipo {
+            background: #eee;
+            color: #ce0808;
+            font-weight: bold;
+            border-radius: 8px;
+            padding: 4px 12px;
+            display: inline-block;
+            font-size: 0.98rem;
+            margin-top: 6px;
+        }
+        .perfil-status {
+            color: #0a0;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .perfil-erro {
+            color: #e74c3c;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar-principal">
+            <div class="nav-content">
+              <a href="/index.html">   <img src="../img/logoFk.png" alt="logoFk"></a>
+                <div class="nav-icons">
+                    <a href="https://wa.me/11975077424" target="_blank" title="WhatsApp">
+                        <img src="../img/whatsappLogo.png" alt="WhatsApp" class="icon">
+                    </a>
+                    <div class="user-menu-wrapper">
+                        <img id="navbarUserIcon" src="../img/usuario.png" alt="Usuário" class="icon" />
+                        <div id="userDropdownMenu" class="dropdown-menu">
+                            <p class="user-name">Olá, <span id="userNome">Usuário</span> 👋</p>
+                            <a href="./perfil.html">Meu Perfil</a>
+                            <a href="./minhaGaragem.html">Minha Garagem</a>
+                            <button id="logoutBtn">Sair</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <form class="perfil-container" id="perfilForm" autocomplete="off">
+            <div class="perfil-status" id="perfilStatus"></div>
+            <div class="perfil-erro" id="perfilErro"></div>
+            <div class="perfil-foto-upload">
+                <img id="perfilFoto" src="../img/usuario.png" alt="Foto de perfil" class="perfil-foto">
+                <br>
+                <label for="inputFotoPerfil">Trocar foto de perfil</label>
+                <input type="file" id="inputFotoPerfil" accept="image/*">
+            </div>
+            <div class="perfil-info">
+                <label for="perfilNome">Nome:</label>
+                <input type="text" id="perfilNome" required>
+                <label for="perfilEmail">E-mail:</label>
+                <input type="email" id="perfilEmail" required>
+                <label for="perfilTipo">Tipo de usuário:</label>
+                <span id="perfilTipo" class="perfil-tipo"></span>
+                <label for="perfilSenha">Nova senha:</label>
+                <input type="password" id="perfilSenha" placeholder="Deixe em branco para não alterar">
+            </div>
+            <div class="perfil-actions">
+                <button class="btn" type="submit">Salvar Alterações</button>
+                <button class="btn" type="button" onclick="window.location.href='./minhaGaragem.html'">Minha Garagem</button>
+                <button class="btn" type="button" onclick="window.location.href='./modelos.html'">Personalizar Moto</button>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <p>FK Custom &copy; 2025</p>
+    </footer>
+    <script>
+        // Busca usuário logado do localStorage
+        let usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || '{}');
+        const perfilFoto = document.getElementById('perfilFoto');
+        const perfilNome = document.getElementById('perfilNome');
+        const perfilEmail = document.getElementById('perfilEmail');
+        const perfilTipo = document.getElementById('perfilTipo');
+        const inputFotoPerfil = document.getElementById('inputFotoPerfil');
+        const perfilStatus = document.getElementById('perfilStatus');
+        const perfilErro = document.getElementById('perfilErro');
+        const perfilSenha = document.getElementById('perfilSenha');
+        const perfilForm = document.getElementById('perfilForm');
+
+        // Função para buscar dados atualizados do usuário no backend
+        async function carregarPerfil() {
+            perfilStatus.textContent = "Carregando...";
+            perfilErro.textContent = "";
+            try {
+                // Se usar JWT, envie o token no header Authorization
+                // const token = localStorage.getItem("token");
+                const response = await fetch(`http://10.92.195.72:8080/usuarios/${usuarioLogado.id}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        // "Authorization": `Bearer ${token}`
+                    }
+                });
+                if (!response.ok) throw new Error("Erro ao buscar dados do usuário.");
+                const usuario = await response.json();
+                perfilNome.value = usuario.nome;
+                perfilEmail.value = usuario.email;
+                perfilTipo.textContent = usuario.tipo === "ADMIN" ? "Administrador" : "Usuário";
+                perfilFoto.src = usuario.fotoPerfil && usuario.fotoPerfil.startsWith('data:image/')
+                    ? usuario.fotoPerfil
+                    : "../img/usuario.png";
+                perfilStatus.textContent = "";
+                usuarioLogado = usuario;
+                localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+            } catch (err) {
+                perfilStatus.textContent = "";
+                perfilErro.textContent = "Erro ao carregar perfil.";
+            }
+        }
+
+        // Atualiza foto de perfil no backend
+        inputFotoPerfil.addEventListener('change', async function() {
+            perfilStatus.textContent = "Atualizando foto...";
+            perfilErro.textContent = "";
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const novaFoto = e.target.result;
+                    try {
+                        // Se usar JWT, envie o token no header Authorization
+                        // const token = localStorage.getItem("token");
+                        const response = await fetch(`http://10.92.195.72:8080/usuarios/${usuarioLogado.id}`, {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json",
+                                // "Authorization": `Bearer ${token}`
+                            },
+                            body: JSON.stringify({
+                                ...usuarioLogado,
+                                fotoPerfil: novaFoto
+                            })
+                        });
+                        if (!response.ok) throw new Error("Erro ao atualizar foto.");
+                        perfilFoto.src = novaFoto;
+                        perfilStatus.textContent = "Foto atualizada!";
+                        perfilErro.textContent = "";
+                        usuarioLogado.fotoPerfil = novaFoto;
+                        localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
+                    } catch (err) {
+                        perfilStatus.textContent = "";
+                        perfilErro.textContent = "Erro ao atualizar foto.";
+                    }
+                };
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        // Atualiza nome, email e senha
+        perfilForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            perfilStatus.textContent = "Salvando...";
+            perfilErro.textContent = "";
+            const novoNome = perfilNome.value.trim();
+            const novoEmail = perfilEmail.value.trim();
+            const novaSenha = perfilSenha.value.trim();
+
+            if (!novoNome || !novoEmail) {
+                perfilErro.textContent = "Nome e e-mail são obrigatórios.";
+                return;
+            }
+
+            try {
+                // Se usar JWT, envie o token no header Authorization
+                // const token = localStorage.getItem("token");
+                const body = {
+                    ...usuarioLogado,
+                    nome: novoNome,
+                    email: novoEmail
+                };
+                if (novaSenha) body.senha = novaSenha;
+
+                const response = await fetch(`http://10.92.195.72:8080/usuarios/${usuarioLogado.id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        // "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify(body)
+                });
+                if (!response.ok) throw new Error("Erro ao atualizar perfil.");
+                const usuarioAtualizado = await response.json();
+                perfilStatus.textContent = "Perfil atualizado!";
+                perfilErro.textContent = "";
+                usuarioLogado = usuarioAtualizado;
+                localStorage.setItem('usuarioLogado', JSON.stringify(usuarioAtualizado));
+                perfilSenha.value = "";
+            } catch (err) {
+                perfilStatus.textContent = "";
+                perfilErro.textContent = "Erro ao atualizar perfil.";
+            }
+        });
+
+        // Menu do usuário (dropdown)
+        const userIcon = document.getElementById("navbarUserIcon");
+        const dropdownMenu = document.getElementById("userDropdownMenu");
+        const userNameEl = document.getElementById("userNome");
+        const logoutBtn = document.getElementById("logoutBtn");
+
+        if (userNameEl && usuarioLogado && usuarioLogado.nome) {
+            userNameEl.textContent = usuarioLogado.nome.split(" ")[0];
+        }
+        if (userIcon && usuarioLogado.fotoPerfil && usuarioLogado.fotoPerfil.startsWith('data:image/')) {
+            userIcon.src = usuarioLogado.fotoPerfil;
+        }
+        if (userIcon && dropdownMenu) {
+            userIcon.addEventListener("click", (event) => {
+                event.stopPropagation();
+                dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+            });
+            document.addEventListener("click", () => {
+                dropdownMenu.style.display = "none";
+            });
+        }
+        if (logoutBtn) {
+            logoutBtn.addEventListener("click", () => {
+                localStorage.removeItem("usuarioLogado");
+                localStorage.removeItem("token");
+                window.location.href = "index.html";
+            });
+        }
+
+        // Carrega perfil ao abrir a página
+        if (usuarioLogado && usuarioLogado.id) {
+            carregarPerfil();
+        } else {
+            perfilErro.textContent = "Usuário não autenticado.";
+        }
+    </script>
+</body>
+</html>

@@ -17,13 +17,23 @@
     <header>
         <nav class="navbar-principal">
             <div class="nav-content">
-                <img src="../img/logoFk.png" alt="logoFk">
+                <a href="/index.html">   <img src="../img/logoFk.png" alt="logoFk"></a>
                 <div class="nav-icons">
                     <a href="https://wa.me/11975077424" target="_blank" title="WhatsApp">
                         <img src="../img/whatsappLogo.png" alt="WhatsApp" class="icon">
                     </a>
-                    <a href="./minhaGaragem.html?somenteCards=1" title="Usuário">
-                        <img id="navbarUserIcon" src="../img/usuario.png"  alt="Usuário"  class="icon">
+                    <div class="user-menu-wrapper">
+    <img id="navbarUserIcon" src="../img/usuario.png" alt="Usuário" class="icon" />
+    <div id="userDropdownMenu" class="dropdown-menu">
+        <p class="user-name">Olá, <span id="userNome">Usuário</span> 👋</p>
+        <a href="./perfil.html">Meu Perfil</a>
+        <a href="./minhaGaragem.html">Minha Garagem</a>
+        <button id="logoutBtn">Sair</button>
+    </div>
+</div>
+
+                    </div>
+
                     </a>
                 </div>
             </div>
@@ -41,7 +51,8 @@
                     <li><button class="etapa-btn" onclick="switchPage('../pages/cores.html')">2. Cores</button></li>
                     <li><button class="etapa-btn" onclick="switchPage('../pages/adesivos.html')">3. Adesivos</button>
                     </li>
-                    <li><button class="etapa-btn" onclick="switchPage('../pages/minhaGaragem.html')">4. Minha Moto</button></li>
+                    <li><button class="etapa-btn" onclick="switchPage('../pages/minhaGaragem.html')">4. Minha
+                            Moto</button></li>
                 </ul>
             </nav>
             <div class="preview-container">
@@ -63,11 +74,11 @@
 
     <footer>
         <!-- Rodapé com total e botões de ação -->
-    
+
         <button class="btn avancar" onclick="switchPage('../pages/cores.html')" disabled>Avançar</button>
     </footer>
 
-    
+    <script src="../javaScript/modelosCorAdesivos.js"></script>
     <script src="../javaScript/script.js"></script>
 </body>
 
